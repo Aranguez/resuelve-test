@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import '../styles/index.scss';
+
+import { connect } from 'react-redux';
+import { getFilms } from '../actions/data';
 
 import Nav from './nav'
 import Card from './Card';
@@ -15,6 +18,7 @@ class GhibliStudio extends Component {
 
   componentDidMount(){
     this.getMovies();
+    this.simpleAction();
   }
 
   getMovies() {
@@ -35,11 +39,13 @@ class GhibliStudio extends Component {
         console.log(movies)
       });
   }
+
+  simpleAction = () => {
+    this.props.getFilms();
+  }
   
   render() {
     return (
-      
-
       <Router>
         <Fragment>
           <Nav/>
@@ -50,10 +56,21 @@ class GhibliStudio extends Component {
               return <Card key={i} title={movie.title} description={movie.description}/>
             })}
           </div>
+          <pre>
+            { JSON.stringify(this.props) }
+          </pre>
         </Fragment>
       </Router>
     )
   };
 }
 
-export default GhibliStudio;
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+  getFilms: () => dispatch(getFilms())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GhibliStudio);
