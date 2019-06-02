@@ -1,36 +1,49 @@
 import * as types from './types';
 
-export const getFilms = () => dispatch => {
-  dispatch({
-   type: types.GET_FILMS,
-   payload: 'Get all films'
-  })
+/**
+ * @description Fetch and returns all films
+ */
+export const getMovies = () => dispatch => {
+  fetch('https://ghibliapi.herokuapp.com/films')
+    .then(res => res.json())
+    .then(movies => {
+      let moviesArr = [];
+      movies.forEach(movie => {
+        moviesArr.push({
+          ...movie,
+          img: `/assets/img/posters/${movie.title}.jpg`,
+        });
+      })
+
+      return dispatch({
+        type: types.GET_MOVIES,
+        payload: moviesArr
+       })
+    });
 }
 
-export const getLocations = () => dispatch => {
-  dispatch({
-   type: types.GET_LOCATIONS,
-   payload: 'Get all locations'
-  })
+/**
+ * @description Fetch and returns a film
+ * @param id
+ */
+export const getMovieById = (id) => dispatch => {
+  return fetch(`https://ghibliapi.herokuapp.com/films/${id}`)
+    .then(res => res.json())
+    .then(movie => {
+      return dispatch({
+        type: types.GET_MOVIE_BY_ID,
+        payload: movie
+      })
+    });
 }
 
-export const getPeople = () => dispatch => {
-  dispatch({
-   type: types.GET_PEOPLE,
-   payload: 'Get all people'
-  })
-}
-
-export const getSpecies = () => dispatch => {
-  dispatch({
-   type: types.GET_SPECIES,
-   payload: 'Get all species'
-  })
-}
-
-export const getVehicles = () => dispatch => {
-  dispatch({
-   type: types.GET_VEHICLES,
-   payload: 'Get all vehicles'
+/**
+ * @description Search Films based in the input field
+ * @param input
+ */
+export const search = (input) => dispatch => {
+  return dispatch({
+    type: types.SEARCH,
+    payload: input
   })
 }

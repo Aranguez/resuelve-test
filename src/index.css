@@ -1,3 +1,9 @@
+@import './styles/card.scss';
+@import './styles/description.scss';
+@import './styles/home.scss';
+@import './styles/nav.scss';
+@import './styles/search.scss';
+
 * {
   padding: 0;
   margin: 0;
@@ -6,20 +12,24 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Merriweather', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
 
 .container {
   max-width: 1280px;
   width: 80%;
   margin: 0 auto;
+}
+
+.container-grid {
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 40px;
+}
+
+.container--small {
+  width: 70%;
 }

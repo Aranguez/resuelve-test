@@ -1,5 +1,3 @@
-export const GET_FILMS = 'GET_FILMS';
-export const GET_PEOPLE = 'GET_PEOPLE';
-export const GET_LOCATIONS = 'GET_LOCATIONS';
-export const GET_SPECIES = 'GET_SPECIES';
-export const GET_VEHICLES = 'GET_VEHICLES';
+export const GET_MOVIES = 'GET_FILMS';
+export const GET_MOVIE_BY_ID = 'GET_FILM_BY_ID';
+export const SEARCH = 'SEARCH';

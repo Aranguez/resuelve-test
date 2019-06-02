@@ -1,76 +1,25 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
-import '../styles/index.scss';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { connect } from 'react-redux';
-import { getFilms } from '../actions/data';
+//routes
+import routes from '../routes';
 
-import Nav from './nav'
-import Card from './Card';
+//components
+import Nav from './Nav'
 
-class GhibliStudio extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: []
-    }
-  }
+const GhibliStudio = () => {
+  return (
+    <Router>
+      {<Nav/>}
+      { routes.map(({path, component:C}, index) => { //agregar redirect
+        return (<Route path={path}
+                       exact
+                       render={(props) => <C {...props}/>}
+                       key={index} />)
+      })}
+    </Router>
+  );
+};
 
-  componentDidMount(){
-    this.getMovies();
-    this.simpleAction();
-  }
+export default GhibliStudio;
 
-  getMovies() {
-    fetch('https://ghibliapi.herokuapp.com/films')
-      .then(res => res.json())
-      .then(movies => {
-        console.log(movies)
-        this.setState({
-          movies: movies,
-        })
-      });
-  }
-
-  getMovieById(id) {
-    fetch(`https://ghibliapi.herokuapp.com/films/${id}`)
-      .then(res => res.json())
-      .then(movies => {
-        console.log(movies)
-      });
-  }
-
-  simpleAction = () => {
-    this.props.getFilms();
-  }
-  
-  render() {
-    return (
-      <Router>
-        <Fragment>
-          <Nav/>
-          {/*<Route path="/" exact component={Index} />*/}
-          {/*<Route path="/movie/:id" exact component={Description} />*/}
-          <div className="container">
-            { this.state.movies.map( (movie, i) => {
-              return <Card key={i} title={movie.title} description={movie.description}/>
-            })}
-          </div>
-          <pre>
-            { JSON.stringify(this.props) }
-          </pre>
-        </Fragment>
-      </Router>
-    )
-  };
-}
-
-const mapStateToProps = state => ({
-  ...state
-})
-
-const mapDispatchToProps = dispatch => ({
-  getFilms: () => dispatch(getFilms())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(GhibliStudio);
