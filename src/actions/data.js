@@ -7,17 +7,9 @@ export const getMovies = () => dispatch => {
   fetch('https://ghibliapi.herokuapp.com/films')
     .then(res => res.json())
     .then(movies => {
-      let moviesArr = [];
-      movies.forEach(movie => {
-        moviesArr.push({
-          ...movie,
-          img: `/assets/img/posters/${movie.title}.jpg`,
-        });
-      })
-
       return dispatch({
         type: types.GET_MOVIES,
-        payload: moviesArr
+        payload: movies
        })
     });
 }

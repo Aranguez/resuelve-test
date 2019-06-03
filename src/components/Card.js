@@ -14,7 +14,7 @@ class Card extends Component {
 		return (
 			<div className="card" onClick={ this.showDescription }>
 				<div>
-					<img src={ this.props.img } alt={ this.props.title }/>
+					<img src={`/assets/img/posters/${this.props.title}.jpg`} alt={ this.props.title }/>
 				</div>
 				<div>
 					<h3>{ this.props.title }</h3>

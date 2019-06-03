@@ -1,7 +1,7 @@
-Esta aplicacion fue hecha para el equipo de recruiting de Resuelve tu deuda, méxico.
+Esta aplicacion fue hecha para el equipo de recruiting de Resuelve tu deuda, México.
 
-npm install
 cd resuelve-test
+npm install
 npm start
 
-Espero que les guste
+Muchas gracias por la prueba y espero que les guste.

@@ -11,7 +11,7 @@ const GhibliStudio = () => {
   return (
     <Router>
       {<Nav/>}
-      { routes.map(({path, component:C}, index) => { //agregar redirect
+      { routes.map(({path, component:C}, index) => {
         return (<Route path={path}
                        exact
                        render={(props) => <C {...props}/>}
